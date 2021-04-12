@@ -1,0 +1,112 @@
+# vim: ft=sh
+
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias :q='exit;exit'
+alias :Q='exit;exit'
+
+alias w1='watch -n 0.1'
+
+function fw() {
+    for item in "$@"; do
+        fname="$(command which "$item" 2>/dev/null)"
+        if [[ -n "$fname" ]]; then
+            file "$fname"
+        else
+            echo "$item not found"
+        fi
+    done
+}
+
+function lw() {
+    for item in "$@"; do
+        fname="$(command which "$item" 2>/dev/null)"
+        if [[ -n "$fname" ]]; then
+            ls -lah "$fname"
+        else
+            echo "$item not found"
+        fi
+    done
+}
+
+function vw() {
+    local items item fname
+    items=()
+    for item in "$@"; do
+        fname="$(command which "$item" 2>/dev/null)"
+        if [[ -n "$fname" ]]; then
+            items+=("$fname")
+        else
+            echo "$item not found"
+        fi
+    done
+    [[ "${#items[@]}" -gt 0 ]] && vim "${items[@]}"
+}
+
+complete -c lw
+complete -c fw
+complete -c vw
+
+function pgreptree() {
+    local pid
+    for pid in $(pgrep "$@"); do
+         pstree -aspl $pid
+         echo
+    done
+}
+
+alias sshroot='ssh -l root'
+
+
+### Git aliases ###
+
+alias ga='git add'
+alias gc='git commit -v'
+
+alias gsb='git status -sb'
+alias gd='git diff'
+alias gds='git diff --staged'
+
+alias gsh='git show'
+alias glg='git log --stat'
+
+alias gsta='git stash push'
+alias gstl='git stash list'
+alias gsts='git stash show --text'
+alias gstp='git stash pop'
+alias gstd='git stash drop'
+
+alias grh='git reset'
+alias grhh='git reset --hard'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
+alias gb='git branch'
+
+alias gr='git remote'
+alias gf='git fetch'
+alias gm='git merge'
+alias gl='git pull'
+alias gp='git push'
+alias glum='git pull upstream master'
+alias gpsup='git push --set-upstream origin $(git symbolic-ref --quiet HEAD | sed s/^refs\\/heads\\///)'
+alias ggsup='git push --set-upstream origin $(git symbolic-ref --quiet HEAD | sed s/^refs\\/heads\\///)'
+
+alias glr='git pull --rebase'
+
+alias gfu='git fetch upstream'
+
+alias glu='git pull upstream'
+alias glud='git pull upstream dev'
+alias gludr='git pull --rebase upstream dev'
+
+alias gcd='git checkout dev'
+alias grbd='git rebase dev'
+alias grbud='git rebase upstream/dev'
+alias grbum='git rebase upstream/master'
+
+if [ -e ~/.shared_aliases.local ]; then
+    . ~/.shared_aliases.local
+fi

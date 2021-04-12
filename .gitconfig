@@ -1,0 +1,16 @@
+[core]
+        pager = less
+        excludesfile = ~/.gitignore_global
+[diff]
+        tool = vimdiff
+        guitool = gvimdiff
+[difftool]
+        prompt = false
+[include]
+        path = ~/.gitconfig_local
+[color]
+        ui = auto
+[pull]
+        ff = only
+[init]
+        defaultBranch = master

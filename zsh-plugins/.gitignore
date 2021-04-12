@@ -1,0 +1,3 @@
+*.tmp
+.plugin-cache.sh
+plugins.local.txt

@@ -1,0 +1,86 @@
+# vim: ft=sh
+
+. ~/.config/.homefiles.util.sh
+
+HISTSIZE=10000
+
+for EDITOR in vim vi nano emacs; do
+    if type -p "${EDITOR}" >/dev/null; then
+        export EDITOR="$(command which "${EDITOR}")"
+        export VISUAL="${EDITOR}"
+        break
+    fi
+done
+
+_hfiles_prepend_path() {
+    local arg
+    for arg in "$@"; do
+        if [[ ":$PATH:" != *":$arg:"* ]]; then
+            export PATH="$arg:$PATH"
+        fi
+    done
+}
+
+_hfiles_append_path() {
+    local arg
+    for arg in "$@"; do
+        if [[ ":$PATH:" != *":$arg:"* ]]; then
+            export PATH="$PATH:$arg"
+        fi
+    done
+}
+
+export LESS='-R -F'
+export PAGER="less"
+export BAT_PAGER="$PAGER"
+
+export PIPENV_MAX_DEPTH=10
+
+export GOPATH="$HOME/go"
+
+_hfiles_prepend_path ~/bin ~/.local/bin
+
+case "${OSTYPE}" in
+linux*)
+    if [[ $(less --version 2>/dev/null | sed -n 's/^less \([0-9]*\).*/\1/p') -lt 530 ]]; then
+        # Older versions of less
+        export LESS="$LESS -X"
+    fi
+
+    if [ -d /var/lib/snapd/snap/bin ]; then
+        _hfiles_append_path /var/lib/snapd/snap/bin
+    elif [ -d /snap/bin ]; then
+        _hfiles_append_path /snap/bin
+    fi
+    ;;
+esac
+
+if [ ! -h /sbin ]; then
+    _hfiles_append_path /sbin
+fi
+if [ ! -h /usr/sbin ]; then
+    _hfiles_append_path /usr/sbin
+fi
+
+# Disable XON/XOFF (i.e. Ctrl+S will not freeze the terminal)
+stty -ixon
+
+if [[ -x /usr/bin/dircolors ]]; then
+    if [ -r ~/.dircolors ]; then
+        eval "$(dircolors -b ~/.dircolors)"
+    else
+        eval "$(dircolors -b)"
+    fi
+
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+if [ -e ~/.sharedrc.local ]; then
+    . ~/.sharedrc.local
+fi

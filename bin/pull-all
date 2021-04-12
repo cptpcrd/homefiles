@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -e
+
+. ~/.config/.homefiles.util.sh
+
+while IFS= read -r line; do
+    case "${line}" in
+    ''|'#'*)
+        ;;
+
+    '@'*)
+        cmd="${line:1}"
+        cmd="${cmd/#"~"/"$HOME"}"
+        cmd="${cmd/ "~"/ "$HOME"}"
+
+        echo "Running '${cmd}' ..."
+        bash -c "${cmd}" </dev/null || true
+        ;;
+
+    *)
+        repo_path="${line/#"~"/"$HOME"}"
+
+        if [ -d "${repo_path}" ]; then
+            echo "Pulling $(basename "${repo_path}") ..."
+            (cd "${repo_path}" && git pull --ff-only </dev/null) || true
+        elif [ -e "${repo_path}" ]; then
+            echo "Error: ${repo_path} is not a directory"
+        else
+            echo "Error: ${repo_path} does not exist"
+        fi
+        ;;
+    esac
+done <"${HOMEFILES_DIR}"/pull-all-repos.txt

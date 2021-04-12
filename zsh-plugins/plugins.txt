@@ -1,0 +1,12 @@
+ohmyzsh/ohmyzsh lib/completion.zsh
+ohmyzsh/ohmyzsh lib/git.zsh
+ohmyzsh/ohmyzsh lib/history.zsh
+ohmyzsh/ohmyzsh lib/key-bindings.zsh
+ohmyzsh/ohmyzsh lib/termsupport.zsh
+ohmyzsh/ohmyzsh lib/theme-and-appearance.zsh
+
+ohmyzsh/ohmyzsh plugins/git/git.plugin.zsh
+ohmyzsh/ohmyzsh plugins/python/python.plugin.zsh
+ohmyzsh/ohmyzsh plugins/sudo/sudo.plugin.zsh
+
+romkatv/powerlevel10k powerlevel10k.zsh-theme
