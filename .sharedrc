@@ -2,6 +2,13 @@
 
 . ~/.config/.homefiles.util.sh
 
+unset COLORTERM
+if [[ -x /usr/bin/tput ]]; then
+    if tput setaf 1 &>/dev/null || tput setaf 1 1 1 &>/dev/null || [[ "$(tput Co 2>/dev/null)" -eq 256 ]]; then
+        export COLORTERM=truecolor
+    fi
+fi
+
 HISTSIZE=10000
 
 for EDITOR in vim vi nano emacs; do
@@ -52,6 +59,44 @@ linux*)
     elif [ -d /snap/bin ]; then
         _hfiles_append_path /snap/bin
     fi
+
+    if [[ -x /usr/bin/dircolors ]]; then
+        if [ -r ~/.dircolors ]; then
+            eval "$(dircolors -b ~/.dircolors)"
+        else
+            eval "$(dircolors -b)"
+        fi
+
+        alias ls='ls --color=auto'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
+    ;;
+
+freebsd*)
+    alias ls='ls --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    ;;
+
+netbsd*|openbsd*)
+    if [ -x "$(which gls 2>/dev/null)" ]; then
+        alias ls='gls --color=auto'
+    elif [ -x "$(which colorls 2>/dev/null)" ]; then
+        alias ls='colorls --color=auto'
+    fi
+
+    if [[ "${OSTYPE}" == netbsd* ]]; then
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
     ;;
 esac
 
@@ -64,22 +109,6 @@ fi
 
 # Disable XON/XOFF (i.e. Ctrl+S will not freeze the terminal)
 stty -ixon
-
-if [[ -x /usr/bin/dircolors ]]; then
-    if [ -r ~/.dircolors ]; then
-        eval "$(dircolors -b ~/.dircolors)"
-    else
-        eval "$(dircolors -b)"
-    fi
-
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 
 if [ -e ~/.sharedrc.local ]; then
     . ~/.sharedrc.local
