@@ -16,6 +16,7 @@ while IFS= read -r line; do
 
         printf "Running '%s' ...\n" "${cmd}"
         bash -c "${cmd}" </dev/null || true
+        echo
         ;;
 
     *)
@@ -29,6 +30,7 @@ while IFS= read -r line; do
         else
             printf "Error: %s does not exist\n" ${repo_path}
         fi
+        echo
         ;;
     esac
 done <"${HOMEFILES_DIR}"/pull-all-repos.txt
