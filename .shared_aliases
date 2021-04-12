@@ -15,7 +15,7 @@ function fw() {
         if [[ -n "$fname" ]]; then
             file "$fname"
         else
-            echo "$item not found"
+            printf '%s not found\n' "${item}"
         fi
     done
 }
@@ -26,7 +26,7 @@ function lw() {
         if [[ -n "$fname" ]]; then
             ls -lah "$fname"
         else
-            echo "$item not found"
+            printf '%s not found\n' "${item}"
         fi
     done
 }
@@ -39,7 +39,7 @@ function vw() {
         if [[ -n "$fname" ]]; then
             items+=("$fname")
         else
-            echo "$item not found"
+            printf '%s not found\n' "${item}"
         fi
     done
     [[ "${#items[@]}" -gt 0 ]] && vim "${items[@]}"

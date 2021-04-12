@@ -10,13 +10,13 @@ hfiles_realpath() {
 
     local file
     if file="$(readlink -f -- "$1" 2>/dev/null)"; then
-        echo "${file}"
+        printf '%s\n' "${file}"
     elif file="$(realpath -- "$1" 2>/dev/null)"; then
-        echo "${file}"
+        printf '%s\n' "${file}"
     elif file="$(grealpath -- "$1" 2>/dev/null)"; then
-        echo "${file}"
+        printf '%s\n' "${file}"
     elif file="$(perl -e 'use Cwd "realpath"; print realpath(@ARGV[0]);' -- "$1" 2>/dev/null)"; then
-        echo "${file}"
+        printf '%s\n' "${file}"
     else
         hfiles_die "No equivalent of 'realpath' found"
     fi

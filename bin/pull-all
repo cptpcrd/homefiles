@@ -14,7 +14,7 @@ while IFS= read -r line; do
         cmd="${cmd/#"~"/"$HOME"}"
         cmd="${cmd/ "~"/ "$HOME"}"
 
-        echo "Running '${cmd}' ..."
+        printf "Running '%s' ...\n" "${cmd}"
         bash -c "${cmd}" </dev/null || true
         ;;
 
@@ -22,12 +22,12 @@ while IFS= read -r line; do
         repo_path="${line/#"~"/"$HOME"}"
 
         if [ -d "${repo_path}" ]; then
-            echo "Pulling $(basename "${repo_path}") ..."
+            printf "Pulling %s ...\n" "$(basename "${repo_path}")"
             (cd "${repo_path}" && git pull --ff-only </dev/null) || true
         elif [ -e "${repo_path}" ]; then
-            echo "Error: ${repo_path} is not a directory"
+            printf "Error: %s is not a directory\n" ${repo_path}
         else
-            echo "Error: ${repo_path} does not exist"
+            printf "Error: %s does not exist\n" ${repo_path}
         fi
         ;;
     esac
