@@ -69,6 +69,7 @@ fnames=(
     .shared_aliases
     .gitconfig
     .gitignore_global
+    .vimrc
     bin/*
 )
 
