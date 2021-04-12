@@ -86,6 +86,8 @@ freebsd*)
     ;;
 
 netbsd*|openbsd*)
+    export LESS="$LESS -X"
+
     if [ -x "$(which gls 2>/dev/null)" ]; then
         alias ls='gls --color=auto'
     elif [ -x "$(which colorls 2>/dev/null)" ]; then
