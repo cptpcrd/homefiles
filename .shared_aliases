@@ -71,6 +71,7 @@ alias gds='git diff --staged'
 
 alias gsh='git show'
 alias glg='git log --stat'
+alias glog='git log --stat'
 
 alias gsta='git stash push'
 alias gstl='git stash list'
@@ -106,6 +107,8 @@ alias gcd='git checkout dev'
 alias grbd='git rebase dev'
 alias grbud='git rebase upstream/dev'
 alias grbum='git rebase upstream/master'
+
+alias gs='echo No'
 
 if [ -e ~/.shared_aliases.local ]; then
     . ~/.shared_aliases.local
