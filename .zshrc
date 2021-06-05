@@ -40,6 +40,8 @@ fi
 autoload -U compaudit compinit
 compinit
 
+CASE_SENSITIVE=true
+
 ### </Completion> ###
 
 # [ plugins.txt -ot .plugin-cache.sh ] will fail (and cause this if statement to run) if either:
