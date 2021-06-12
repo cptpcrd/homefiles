@@ -11,8 +11,8 @@ while IFS= read -r line; do
 
     '@'*)
         cmd="${line:1}"
-        cmd="${cmd/#"~"/"$HOME"}"
-        cmd="${cmd/ "~"/ "$HOME"}"
+        cmd="${cmd/#"~"/"${HOME}"}"
+        cmd="${cmd/ "~"/ "${HOME}"}"
 
         printf "Running '%s' ...\n" "${cmd}"
         bash -c "${cmd}" </dev/null || true
@@ -20,7 +20,7 @@ while IFS= read -r line; do
         ;;
 
     *)
-        repo_path="${line/#"~"/"$HOME"}"
+        repo_path="${line/#"~"/"${HOME}"}"
 
         if [ -d "${repo_path}" ]; then
             printf "Pulling %s ...\n" "$(basename "${repo_path}")"

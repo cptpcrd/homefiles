@@ -11,9 +11,9 @@ alias w1='watch -n 0.1'
 
 function fw() {
     for item in "$@"; do
-        fname="$(command which "$item" 2>/dev/null)"
-        if [[ -n "$fname" ]]; then
-            file "$fname"
+        fname="$(command which "${item}" 2>/dev/null)"
+        if [[ -n "${fname}" ]]; then
+            file "${fname}"
         else
             printf '%s not found\n' "${item}"
         fi
@@ -22,9 +22,9 @@ function fw() {
 
 function lw() {
     for item in "$@"; do
-        fname="$(command which "$item" 2>/dev/null)"
-        if [[ -n "$fname" ]]; then
-            ls -lah "$fname"
+        fname="$(command which "${item}" 2>/dev/null)"
+        if [[ -n "${fname}" ]]; then
+            ls -lah "${fname}"
         else
             printf '%s not found\n' "${item}"
         fi
@@ -35,9 +35,9 @@ function vw() {
     local items item fname
     items=()
     for item in "$@"; do
-        fname="$(command which "$item" 2>/dev/null)"
-        if [[ -n "$fname" ]]; then
-            items+=("$fname")
+        fname="$(command which "${item}" 2>/dev/null)"
+        if [[ -n "${fname}" ]]; then
+            items+=("${fname}")
         else
             printf '%s not found\n' "${item}"
         fi
@@ -52,7 +52,7 @@ complete -c vw
 function pgreptree() {
     local pid
     for pid in $(pgrep "$@"); do
-         pstree -aspl $pid
+         pstree -aspl "${pid}"
          echo
     done
 }

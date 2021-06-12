@@ -22,8 +22,8 @@ done
 _hfiles_prepend_path() {
     local arg
     for arg in "$@"; do
-        if [[ ":$PATH:" != *":$arg:"* ]]; then
-            export PATH="$arg:$PATH"
+        if [[ ":${PATH}:" != *":${arg}:"* ]]; then
+            export PATH="${arg}:${PATH}"
         fi
     done
 }
@@ -31,19 +31,19 @@ _hfiles_prepend_path() {
 _hfiles_append_path() {
     local arg
     for arg in "$@"; do
-        if [[ ":$PATH:" != *":$arg:"* ]]; then
-            export PATH="$PATH:$arg"
+        if [[ ":${PATH}:" != *":${arg}:"* ]]; then
+            export PATH="${PATH}:${arg}"
         fi
     done
 }
 
 export LESS='-R -F'
 export PAGER="less"
-export BAT_PAGER="$PAGER"
+export BAT_PAGER="${PAGER}"
 
 export PIPENV_MAX_DEPTH=10
 
-export GOPATH="$HOME/go"
+export GOPATH="${HOME}/go"
 
 _hfiles_prepend_path ~/bin ~/.local/bin
 
