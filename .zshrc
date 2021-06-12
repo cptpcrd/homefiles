@@ -48,7 +48,7 @@ CASE_SENSITIVE=true
 # 1. .plugin-cache.sh doesn't exist
 # 2. plugins.txt is newer than .plugin-cache.sh
 if ! [ "${HOMEFILES_DIR}"/zsh-plugins/plugins.txt -ot "${HOMEFILES_DIR}"/zsh-plugins/.plugin-cache.sh ] 2>/dev/null; then
-    zsh-plugins/update.sh
+    "${HOMEFILES_DIR}"/zsh-plugins/update.sh
 fi
 
 . "${HOMEFILES_DIR}"/zsh-plugins/.plugin-cache.sh
