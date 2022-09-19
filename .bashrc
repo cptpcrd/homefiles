@@ -7,14 +7,16 @@ shopt -s histappend
 
 shopt -s checkwinsize
 
-bind '"\e[1;5D" backward-word'
-bind '"\e[1;5C" forward-word'
+if [[ $- == *i* ]]; then
+    bind '"\e[1;5D" backward-word'
+    bind '"\e[1;5C" forward-word'
 
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
+    bind '"\e[A":history-search-backward'
+    bind '"\e[B":history-search-forward'
 
-bind '"\e[3;5~":kill-word'
-bind '"\C-H":backward-kill-word'
+    bind '"\e[3;5~":kill-word'
+    bind '"\C-H":backward-kill-word'
+fi
 
 COLOR_PROMPT='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 NOCOLOR_PROMPT='\u@\h:\w\$ '
