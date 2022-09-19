@@ -57,7 +57,7 @@ if [ -e "${UTILSH_PATH}" ]; then
 else
     mkdir -p "${UTILSH_PATH%/*}"
     ln -s "${HOMEFILES_DIR}"/util.sh "${UTILSH_PATH}"
-    printf '%s -> %s' "${UTILSH_PATH}" "${HOMEFILES_DIR}"/util.sh
+    printf '%s -> %s\n' "${UTILSH_PATH}" "${HOMEFILES_DIR}"/util.sh
 fi
 
 fnames=(
@@ -100,7 +100,7 @@ for fname in "${fnames[@]}"; do
     fi
 
     ln -s "${prefix}${HOMEFILES_RELDIR}/${fname}" ~/"${fname}" || hfiles_die "Error creating symlink"
-    printf '%s -> %s' ~/"${fname}" "${prefix}${HOMEFILES_RELDIR}/${fname}"
+    printf '%s -> %s\n' ~/"${fname}" "${prefix}${HOMEFILES_RELDIR}/${fname}"
 done
 
 zsh-plugins/update.sh || hfiles_die "Error updating ZSH plugins"
