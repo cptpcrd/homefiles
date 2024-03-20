@@ -93,7 +93,7 @@ alias gl='git pull'
 alias gp='git push'
 alias glum='git pull upstream master'
 alias gpsup='git push --set-upstream origin $(git symbolic-ref --quiet HEAD | sed s/^refs\\/heads\\///)'
-alias ggsup='git push --set-upstream origin $(git symbolic-ref --quiet HEAD | sed s/^refs\\/heads\\///)'
+alias ggsup='git branch --set-upstream-to origin/$(git symbolic-ref --quiet HEAD | sed s/^refs\\/heads\\///)'
 
 alias glr='git pull --rebase'
 
