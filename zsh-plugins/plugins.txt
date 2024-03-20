@@ -3,6 +3,7 @@ ohmyzsh/ohmyzsh lib/git.zsh
 ohmyzsh/ohmyzsh lib/history.zsh
 ohmyzsh/ohmyzsh lib/key-bindings.zsh
 ohmyzsh/ohmyzsh lib/termsupport.zsh
+ohmyzsh/ohmyzsh lib/functions.zsh
 ohmyzsh/ohmyzsh lib/theme-and-appearance.zsh
 
 ohmyzsh/ohmyzsh plugins/git/git.plugin.zsh
